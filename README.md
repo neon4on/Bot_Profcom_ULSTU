@@ -1,4 +1,5 @@
 # Bot_Profcom_ULSTU
 
-pip intall vk-api
+pip intsall vk-api
+
 pip install vktools
