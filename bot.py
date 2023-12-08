@@ -5,7 +5,7 @@ import socket
 import urllib3.exceptions
 from vktools import Keyboard, ButtonColor, Text, OpenLink
 
-vk = vk_api.VkApi(token="vk1.a.h9NqJdw2Bmybks7mC01e66EYc5J7DhN_5_S8Xfx-1b7lpC6xl4qJDm7nA4NpWmHMl250Wjp0lJGLykh9teSujehd9IxWeXJ4jRPfj6pOevjnAFdCqPqMufweIE523nG5BkCjkXfOHs54L8ejjmKwRaD_QksdT7O50mu8_XXmQzOaz3Q3S9b1S71ZCEglc-W-I3TKjKdIx8xcGXAHuPsr4A")
+vk = vk_api.VkApi(token="xxx")
 
 
 def send_message(user_id, message, keyboard=None):
@@ -26,18 +26,22 @@ while True:
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                 text = event.text.lower()
                 user_id = event.user_id
-        
+
                 if text == "начать" or text == "старт" or text == "start":
                     keyboard = Keyboard(
                         [
                             [
-                                OpenLink("ПГАС", "https://vk.com/wall-22117146_3797"),
-                                OpenLink("ГСС", "https://vk.com/wall-22117146_3785"),
+                                OpenLink("ПОВЫШЕННАЯ ГОС. СОЦИАЛЬНАЯ СТИПЕНДИЯ", "https://vk.com/wall-22117146_3797"),
+
                             ],
                             [
-                                OpenLink("ПСС", "https://vk.com/wall-22117146_3799"),
+                                OpenLink("ГОСУДАРСТВЕННАЯ СОЦИАЛЬНАЯ СТИПЕНДИЯ", "https://vk.com/wall-22117146_3785"),
+
+                            ],
+                            [
+                                OpenLink("ПОВЫШЕННАЯ СОЦИАЛЬНАЯ СТИПЕНДИЯ", "https://vk.com/wall-22117146_3799"),
                                 OpenLink("ПРОФКАРД", "https://vk.com/wall-22117146_3807"),
-                                
+
                             ],
                             [
                                 OpenLink("Мат.помощь от Профсоюза", "https://vk.com/wall-22117146_3800"),
@@ -47,11 +51,11 @@ while True:
                                 OpenLink("Стипендии", "https://vk.com/wall-22117146_3783"),
                             ],
                             [
-                                Text("АДМИНИСТРАТОР", ButtonColor.NEGATIVE),
+                                Text("Вызвать администратора", ButtonColor.NEGATIVE),
                             ],
                         ],
                     )
 
                     send_message(user_id, "Если кнопки скрыты - повторите start в чат", keyboard)
-    except (ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError, socket.timeout, urllib3.exceptions.ReadTimeoutError):
+    except (ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError, socket.timeout, urllib3.exceptions.ReadTimeoutError, vk_api.exceptions.ApiHttpError):
         print('_______Timeout______')
