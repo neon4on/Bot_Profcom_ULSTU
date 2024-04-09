@@ -4,6 +4,7 @@ from requests import ReadTimeout, ConnectTimeout, HTTPError, Timeout, Connection
 import socket
 import urllib3.exceptions
 from vktools import Keyboard, ButtonColor, Text, OpenLink
+<<<<<<< HEAD
 import time
 import logging
 
@@ -24,6 +25,23 @@ def send_message(user_id, message, keyboard=None):
         time.sleep(1)
     except (ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError, socket.timeout, urllib3.exceptions.ReadTimeoutError, vk_api.exceptions.ApiHttpError) as e:
         logging.error(f"Ошибка при отправке сообщения: {str(e)}")
+=======
+
+vk = vk_api.VkApi(token="xxx")
+
+
+def send_message(user_id, message, keyboard=None):
+    values = {
+        "user_id": user_id,
+        "message": message,
+        "random_id": 0
+    }
+
+    if keyboard is not None:
+        values["keyboard"] = keyboard.add_keyboard()
+
+    vk.method("messages.send", values)
+>>>>>>> a514e8ab0267ed230d89a6994a0966f208a1ee46
 
 while True:
     try:
@@ -37,13 +55,25 @@ while True:
                         [
                             [
                                 OpenLink("ПОВЫШЕННАЯ ГОС. СОЦИАЛЬНАЯ СТИПЕНДИЯ", "https://vk.com/wall-22117146_3797"),
+<<<<<<< HEAD
                             ],
                             [
                                 OpenLink("ГОСУДАРСТВЕННАЯ СОЦИАЛЬНАЯ СТИПЕНДИЯ", "https://vk.com/wall-22117146_3785"),
+=======
+
+                            ],
+                            [
+                                OpenLink("ГОСУДАРСТВЕННАЯ СОЦИАЛЬНАЯ СТИПЕНДИЯ", "https://vk.com/wall-22117146_3785"),
+
+>>>>>>> a514e8ab0267ed230d89a6994a0966f208a1ee46
                             ],
                             [
                                 OpenLink("ПОВЫШЕННАЯ СОЦИАЛЬНАЯ СТИПЕНДИЯ", "https://vk.com/wall-22117146_3799"),
                                 OpenLink("ПРОФКАРД", "https://vk.com/wall-22117146_3807"),
+<<<<<<< HEAD
+=======
+
+>>>>>>> a514e8ab0267ed230d89a6994a0966f208a1ee46
                             ],
                             [
                                 OpenLink("Мат.помощь от Профсоюза", "https://vk.com/wall-22117146_3800"),
@@ -52,6 +82,7 @@ while True:
                             [
                                 OpenLink("Стипендии", "https://vk.com/wall-22117146_3783"),
                             ],
+<<<<<<< HEAD
                             # [
                             #     Text("Вызвать администратора", ButtonColor.NEGATIVE),
                             # ],
@@ -66,3 +97,14 @@ while True:
         break
     except Exception as e:
         print(f"Произошла ошибка: {str(e)}")
+=======
+                            [
+                                Text("Вызвать администратора", ButtonColor.NEGATIVE),
+                            ],
+                        ],
+                    )
+
+                    send_message(user_id, "Если кнопки скрыты - повторите start в чат", keyboard)
+    except (ConnectTimeout, HTTPError, ReadTimeout, Timeout, ConnectionError, socket.timeout, urllib3.exceptions.ReadTimeoutError, vk_api.exceptions.ApiHttpError):
+        print('_______Timeout______')
+>>>>>>> a514e8ab0267ed230d89a6994a0966f208a1ee46
